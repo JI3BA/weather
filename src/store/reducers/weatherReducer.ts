@@ -4,18 +4,6 @@ const initialState: weatherState = {
     weathers: [],
     loading: false,
     error: null,
-    // weather: [{main: '', description: ''}],
-    // main: {
-    //     temp: 0,
-    //     feels_like: 0,
-    //     pressure: 0,
-    //     humidity: 0
-    // },
-    // visibility: 0,
-    // wind: {
-    //     speed: 0,
-    //     deg: 0,
-    // }
 }
 
 export const weatherReducer = (state = initialState, action: TypesAction): weatherState => {

@@ -2,21 +2,6 @@ export interface weatherState {
     weathers: any[],
     loading: boolean,
     error: null | string,
-    // weather?: [{
-    //     main: string,
-    //     description: string
-    // }],
-    // main?: {
-    //     temp: number,
-    //     feels_like: number,
-    //     pressure: number,
-    //     humidity: number
-    // },
-    // visibility?: number,
-    // wind?: {
-    //     speed: number,
-    //     deg: number,
-    // }
 }
 
 

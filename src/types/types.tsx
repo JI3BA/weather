@@ -1,13 +1,3 @@
-// export interface IMain {
-//     temp: number;
-//     humidity: number;
-//     pressure: number;
-// }
-
-// export interface IWind {
-//     speed: number;
-// }
-
 export interface IWeather {
     weather: Array<{
         main: string,

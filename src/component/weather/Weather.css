@@ -1,5 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,400;1,500&display=swap');
+
 .weather{
+    max-width: 400px;
+    width: 100%;
+    border: 2px solid rgb(119, 119, 119);
+    border-radius: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: 'Montserrat', sanf-serif;
+    color: rgb(73, 73, 73);;
+}
+
+.weather-container{
+    width: 100%;
+}
+
+.weather-header{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+}
+
+.weather-input{
+    outline: none;
+    border: 2px solid rgb(119, 119, 119);
+    color: rgb(119, 119, 119);
+    max-width: 250px;
+    width: 100%;
+    padding: 5px 5px;
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-size: 18px;
+    margin-left: 10px;
+}
+
+.weather-btn{
+    width: 35px;
+    height: 35px;
+    background: #ffffff;
+    border: 2px solid rgb(119, 119, 119);
+    color: rgb(119, 119, 119);
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-size: 18px;
+    margin-right: 10px;
+    cursor: pointer;
+    transform: scale(1);
+    transition: all 200ms;
+}
+
+.weather-btn:hover{
+    background-color: rgb(119, 119, 119);;
+    color: #ffffff;
+}
+
+.weather-btn:active{
+    transform: scale(0.9);
+}
+
+.weather-info-container{
+    padding: 0 10px;
+}
+
+.weather-info-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.weather-city{
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.weather-day{
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.weather-info-main{
+    display: flex;
+    justify-content: space-between;
+}
+
+.weather-info-main__left{
+    display: flex;
+    flex-direction: column;
+}
+
+.weather-info-main__right{
+    display: flex;
+    align-items: flex-start;
+}
+
+.weather-temp{
+    font-size: 40px;
+    font-weight: 600;
+}
+
+.weather-desc__image{
+    width: 100px;
+    height: 100px;
 }
