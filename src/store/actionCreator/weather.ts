@@ -17,7 +17,7 @@ export const fetchingWeather = (city: string = 'Minsk') => {
         } catch(e) {
             dispatch({
                 type: WeatherActionTypes.FETCH_WEATHER_ERROR,
-                payload: 'Error, weather don`t found!'
+                payload: 'Error, city don`t found!'
             })
         }
 
@@ -37,7 +37,7 @@ export const fetchingForecast = (city: string = 'Minsk') => {
         } catch(e) {
             dispatch({
                 type: WeatherForecastActionTypes.FETCH_FORECAST_ERROR,
-                payload: 'Error, weather don`t found!'
+                payload: 'Error, city don`t found!'
             })
         }
 

@@ -3,15 +3,9 @@ import { useTypesSelector } from "../../hooks/useTypesSelector";
 import { useActions } from "../../hooks/useActions";
 import './Weather.css'
 
-const days: string[] = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
-const day = new Date()
-let dayNow: string = ''
-
-days.find((item,index) => {
-    if(index === day.getDay()){
-        dayNow = item
-    }
-})
+//const days: string[] = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
+//const day = new Date()
+//let dayNow: string = ''
 
 
 const Weather: FC = () => {
@@ -21,11 +15,19 @@ const Weather: FC = () => {
     const {fetchingForecast} = useActions()
     const [temp, setTemp] = useState('℃')
     const [inputValue, setInputValue] = useState('')
+    const [days, setDays] = useState(['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'])
+    const [currentDay, setCurrentDay] = useState('')
 
     useEffect(() => {
         fetchingWeather()
         fetchingForecast()
-        console.log(forecastWeather)
+
+        days.filter((item,index): void => {
+            if(index === new Date().getDay()){
+                setCurrentDay(item)
+            }
+        })
+
     }, [])
 
     const handleKeyDown: any = (event: any) => {
@@ -39,10 +41,18 @@ const Weather: FC = () => {
     const onChangeHandle = (e: any) => {
         setInputValue(e.target.value)
     }
+
+    const getDays: any = (data: any) => {
+        days.filter((item,index): void => {
+            if(index === new Date(data.dt_txt).getDay()){
+                setCurrentDay(item)
+            }
+        })
+    }
     
     if(error || forecastError){
         return (
-        <div>
+        <div className="weather-error">
             <input className='weather-input' type="text" placeholder="city" onKeyDown={handleKeyDown} value={inputValue} onChange={onChangeHandle} maxLength={15} />
             <h1>{error}</h1>
         </div>)
@@ -55,6 +65,7 @@ const Weather: FC = () => {
     return (
         <div className="weather">
             <div className="weather-container">
+
                 <div className="weather-header" onKeyDown={handleKeyDown}>
                     <input className='weather-input' type="text" placeholder="city" value={inputValue} onChange={onChangeHandle} maxLength={15} />
                     <div className="weather-btns">
@@ -62,13 +73,14 @@ const Weather: FC = () => {
                         <button className="weather-btn btn-fr" onClick={() => setTemp('℉')}>℉</button>
                     </div>
                 </div>
+
                 <div className="weather-info-container">
                     {[...weathers].map((weather, index) => 
-                        <div key={index} className="weather-info-container">
+                        <div key={index} className="weather-current-container">
 
                             <div className="weather-info-header">
                                 <p className="weather-city">{weather.name}, {weather.sys.country}</p>
-                                <p className="weather-day">{dayNow}</p>
+                                <p className="weather-day">{currentDay}</p>
                             </div>
 
                             <div className="weather-info-main">
@@ -117,6 +129,58 @@ const Weather: FC = () => {
                         </div>)
                     }
                 </div>
+            </div>
+
+            <div className="forecast">
+                    {[...forecastWeather].map(forecast =>
+                        <div className="forecast-container" key={forecast.city.id}>
+
+                            <div className="forecast-item-container">
+                                {forecast.list.slice(0,7).map((item: any) => 
+                                        <div className="forecast-item" key={item.dt}>
+                                            <p>{new Date(item.dt * 1000).getHours() + ':' 
+                                                    + (new Date(item.dt * 1000).getMinutes() < 10 ?
+                                                    '0' + new Date(item.dt * 1000).getMinutes():
+                                                        new Date(item.dt * 1000).getMinutes())}
+                                            </p>
+                                            <p className="weather-desc__header">{item.weather[0].main}</p>
+                                            <img className="weather-desc__image"alt='clouds' src={`http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`}></img>
+                                            <p className="weather-desc">{item.weather[0].description}</p>
+                                            <p><span style={{fontWeight: 600, paddingLeft: 5}}>{temp === '℃' ?
+                                                        <span>{Math.floor(item.main.temp - 273.15)}℃</span>
+                                                    :
+                                                        <span>{Math.floor(((item.main.temp - 273.15) * (9/5)) + 32)}℉</span>
+                                            }</span>
+                                            </p>
+                                        </div>
+                                )}
+                            </div>
+                            
+                            <div className="forecast-days-container">
+                                {forecast.list.filter((list: any) => forecast.list.indexOf(list) % 8 === 0).map((list: any) => 
+                                    <div className="forecast-item forecast-days" key={list.dt}>
+                                        <p>{days[new Date(list.dt_txt).getDay()]}</p>
+                                        <p className="weather-desc__header">{list.weather[0].main}</p>
+                                        <img className="weather-desc__image"alt='clouds' src={`http://openweathermap.org/img/wn/${list.weather[0].icon}@2x.png`}></img>
+                                        <p className="weather-desc">{list.weather[0].description}</p>
+                                        <p><span style={{fontWeight: 600, paddingLeft: 5}}>{temp === '℃' ?
+                                                        <span>{Math.floor(list.main.temp_max - 273.15)}℃</span>
+                                                    :
+                                                        <span>{Math.floor(((list.main.temp_max - 273.15) * (9/5)) + 32)}℉</span>
+                                            }</span> /
+                                            <span style={{fontWeight: 600, paddingLeft: 5}}>{temp === '℃' ?
+                                                        <span>{Math.floor(list.main.temp_min - 273.15)}℃</span>
+                                                    :
+                                                        <span>{Math.floor(((list.main.temp_min - 273.15) * (9/5)) + 32)}℉</span>
+                                            }</span>
+                                        </p>
+                                    </div>
+                                )}
+                            </div>
+                            
+                           
+                        </div>
+                    )}
             </div>
         </div>
     )
