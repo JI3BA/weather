@@ -4,4 +4,4 @@ Simple weather app where you can to find city and you will see temparature, pres
 
 ## Tech stack
 
-HTML, CSS, TypeScript, React, React Hooks, Redux, Redux Thunk.
+HTML, CSS, TypeScript, React, Axios, React Hooks, Redux, Redux Thunk.
