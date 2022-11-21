@@ -3,19 +3,16 @@ import { useTypesSelector } from "../../hooks/useTypesSelector";
 import { useActions } from "../../hooks/useActions";
 import './Weather.css'
 
-//const days: string[] = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
-//const day = new Date()
-//let dayNow: string = ''
-
+const days: string[] = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
 
 const Weather: FC = () => {
     const {weathers, loading, error} = useTypesSelector(state => state.weather)
     const {fetchingWeather} = useActions()
     const {forecastWeather, forecastLoading, forecastError} = useTypesSelector(state => state.forecast)
     const {fetchingForecast} = useActions()
+
     const [temp, setTemp] = useState('℃')
     const [inputValue, setInputValue] = useState('')
-    const [days, setDays] = useState(['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'])
     const [currentDay, setCurrentDay] = useState('')
 
     useEffect(() => {
@@ -40,14 +37,6 @@ const Weather: FC = () => {
     
     const onChangeHandle = (e: any) => {
         setInputValue(e.target.value)
-    }
-
-    const getDays: any = (data: any) => {
-        days.filter((item,index): void => {
-            if(index === new Date(data.dt_txt).getDay()){
-                setCurrentDay(item)
-            }
-        })
     }
     
     if(error || forecastError){
@@ -92,19 +81,19 @@ const Weather: FC = () => {
                                     <img className="weather-desc__image"alt='clouds' src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}></img>
                                 </div>
                                 <div className="weather-info-main__right">
-                                    <p>Sunrise: {new Date(weather.sys.sunrise * 1000).getHours() + ':' 
-                                                + (new Date(weather.sys.sunrise * 1000).getMinutes() < 10 ?
-                                                   '0' + new Date(weather.sys.sunrise * 1000).getMinutes():
-                                                    new Date(weather.sys.sunrise * 1000).getMinutes())} am</p>
+                                    <p>Sunrise: {new Date((weather.sys.sunrise + weather.timezone) * 1000).getUTCHours() + ':' 
+                                                + (new Date((weather.sys.sunrise + weather.timezone) * 1000).getMinutes() < 10 ?
+                                                   '0' + new Date((weather.sys.sunrise + weather.timezone) * 1000).getMinutes():
+                                                    new Date((weather.sys.sunrise + weather.timezone) * 1000).getMinutes())} am</p>
                                     {temp === '℃' ?
                                                     <p className="weather-temp">{Math.floor(weather.main.temp - 273.15)}℃</p>
                                                 :
                                                     <p className="weather-temp">{Math.floor(((weather.main.temp - 273.15) * (9/5)) + 32)}℉</p>
                                     }
-                                    <p>Sunset: {new Date(weather.sys.sunset * 1000).getHours() + ':' 
-                                                + (new Date(weather.sys.sunset * 1000).getMinutes() < 10 ? 
-                                                    '0' + new Date(weather.sys.sunset * 1000).getMinutes(): 
-                                                    new Date(weather.sys.sunset * 1000).getMinutes())} pm</p>
+                                    <p>Sunset: {new Date((weather.sys.sunset + weather.timezone) * 1000).getUTCHours() + ':' 
+                                                + (new Date((weather.sys.sunset + weather.timezone) * 1000).getMinutes() < 10 ? 
+                                                    '0' + new Date((weather.sys.sunset + weather.timezone) * 1000).getMinutes(): 
+                                                    new Date((weather.sys.sunset + weather.timezone) * 1000).getMinutes())} pm</p>
                                 </div>
                             </div>
 
