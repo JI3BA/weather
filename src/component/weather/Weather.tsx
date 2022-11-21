@@ -1,4 +1,4 @@
-import React, { FC , useEffect , useState } from "react";
+import { FC , useEffect , useState } from "react";
 import { useTypesSelector } from "../../hooks/useTypesSelector";
 import { useActions } from "../../hooks/useActions";
 import './Weather.css'
@@ -6,9 +6,9 @@ import './Weather.css'
 const days: string[] = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
 
 const Weather: FC = () => {
-    const {weathers, loading, error} = useTypesSelector(state => state.weather)
+    const {weathers, loading, error, city} = useTypesSelector(state => state.weather)
     const {fetchingWeather} = useActions()
-    const {forecastWeather, forecastLoading, forecastError} = useTypesSelector(state => state.forecast)
+    const {forecastWeather, forecastLoading, forecastError, forecastCity} = useTypesSelector(state => state.forecast)
     const {fetchingForecast} = useActions()
 
     const [temp, setTemp] = useState('℃')
@@ -16,16 +16,12 @@ const Weather: FC = () => {
     const [currentDay, setCurrentDay] = useState('')
 
     useEffect(() => {
-        fetchingWeather()
-        fetchingForecast()
+        fetchingWeather(city)
+        fetchingForecast(forecastCity)
 
-        days.filter((item,index): void => {
-            if(index === new Date().getDay()){
-                setCurrentDay(item)
-            }
-        })
+        days.filter((item,index) => index === new Date().getDay() ? setCurrentDay(item) : null)
 
-    }, [])
+    }, [city, forecastCity])
 
     const handleKeyDown: any = (event: any) => {
         if(event.key === 'Enter'){
