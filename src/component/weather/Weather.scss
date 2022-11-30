@@ -4,6 +4,16 @@ $light-gray: rgb(119, 119, 119);
 $text-color-gray: rgb(73, 73, 73);
 $text-name: 'Montserrat';
 
+@mixin flexBetween(){
+    display: flex;
+    justify-content: space-between;
+}
+
+@mixin flexAround(){
+    display: flex;
+    justify-content: space-around;
+}
+
 .weather{
     max-width: 1440px;
     width: 100%;
@@ -49,8 +59,7 @@ $text-name: 'Montserrat';
     }
 
     &__header{
-        display: flex;
-        justify-content: space-between;
+        @include flexBetween();
         padding-top: 10px;
     }
 
@@ -95,8 +104,7 @@ $text-name: 'Montserrat';
         padding: 10px;
 
         &__header{
-            display: flex;
-            justify-content: space-between;
+            @include flexBetween();
         }
 
         &__info{
@@ -105,8 +113,7 @@ $text-name: 'Montserrat';
         }
 
         &__main{
-            display: flex;
-            justify-content: space-between;
+            @include flexBetween();
             padding: 20px 0;
         }
 
@@ -126,10 +133,9 @@ $text-name: 'Montserrat';
         }
 
         &__temp-sunrise{
-            display: flex;
+            @include flexAround();
             flex-direction: column;
             align-items: center;
-            justify-content: space-around;
         }
 
         &__temp{
@@ -138,19 +144,16 @@ $text-name: 'Montserrat';
         }
 
         &__footer{
-            display: flex;
+            @include flexBetween();
             flex-direction: column;
-            justify-content: space-between;
         }
 
         &__temp-maxmin{
-            display: flex;
-            justify-content: space-between;
+            @include flexBetween();
         }
 
         &__enviroment{
-            display: flex;
-            justify-content: space-between;
+            @include flexBetween();
         }
     }
 
@@ -164,8 +167,7 @@ $text-name: 'Montserrat';
         }
 
         &__items{
-            display: flex;
-            justify-content: space-around;
+            @include flexAround();
         }
 
         &__item{
@@ -180,14 +182,12 @@ $text-name: 'Montserrat';
         }
             
         &__days{
-            display: flex;
-            justify-content: space-around;
+            @include flexAround();
             margin-top: 10px;
         }
 
         &__day{
-            display: flex;
-            justify-content: space-around;
+            @include flexAround();
         }
     }
 }

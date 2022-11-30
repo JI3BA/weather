@@ -21,7 +21,7 @@ const Weather: FC = () => {
 
         days.filter((item,index) => index === new Date().getDay() ? setCurrentDay(item) : null)
 
-    }, [city, forecastCity])
+    }, [city, forecastCity])   
 
     const handleKeyDown: any = (event: any) => {
         if(event.key === 'Enter'){
@@ -38,7 +38,7 @@ const Weather: FC = () => {
     if(error || forecastError){
         return (
         <div className="weather__error">
-            <input className='weather-input' type="text" placeholder="city" onKeyDown={handleKeyDown} value={inputValue} onChange={onChangeHandle} maxLength={15} />
+            <input className='weather__input' type="text" placeholder="city" onKeyDown={handleKeyDown} value={inputValue} onChange={onChangeHandle} maxLength={15} />
             <h1>{error}</h1>
         </div>)
     }
