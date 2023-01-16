@@ -1,4 +1,4 @@
-import { FC , useEffect , useState } from "react";
+import React, { FC , useEffect , useState } from "react";
 import { useTypesSelector } from "../../hooks/useTypesSelector";
 import { useActions } from "../../hooks/useActions";
 import './Weather.scss'
@@ -23,15 +23,15 @@ const Weather: FC = () => {
 
     }, [city, forecastCity])   
 
-    const handleKeyDown: any = (event: any) => {
-        if(event.key === 'Enter'){
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>): void => {
+        if(e.key === 'Enter'){
             fetchingWeather(inputValue)
             fetchingForecast(inputValue)
             setInputValue('')
         }
     }
     
-    const onChangeHandle = (e: any) => {
+    const onChangeHandle = (e: React.ChangeEvent<HTMLInputElement>): void => {
         setInputValue(e.target.value)
     }
     

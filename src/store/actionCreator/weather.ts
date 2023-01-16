@@ -4,7 +4,7 @@ import axios from "axios";
 import { TypesAction, TypesActionForecast } from "../../types/weather";
 import { WeatherActionTypes, WeatherForecastActionTypes } from "../../types/weather";
 
-export const fetchingWeather = (city = 'Minsk') => {
+export const fetchingWeather = (city: string = 'Minsk') => {
     const API_KEY: string = '742563dbd33a05f3b419adf49b418ec5'
 
     return async (dispatch: Dispatch<TypesAction>) => {
