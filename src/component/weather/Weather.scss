@@ -1,26 +1,18 @@
-@import '../../App.scss';
+@import '../../styles/App.scss';
+@import '../../styles/mixin/mixin.scss';
+
 $light-gray: rgb(119, 119, 119);
-$text-color-gray: rgb(73, 73, 73);
-
-@mixin flexBetween(){
-    display: flex;
-    justify-content: space-between;
-}
-
-@mixin flexAround(){
-    display: flex;
-    justify-content: space-around;
-}
+$text-color-white: #ffffff;
+$back-opacity-light: rgba(transparent, 0.3);
+$back-opacity-medium: rgba(transparent, 0.5);
 
 .weather{
     max-width: 1440px;
     width: 100%;
-    display: flex;
-    flex-direction: column;
+    @include flexColumn();
     justify-content: center;
     align-items: center;
-    color: $text-color-gray;
-    padding-top: 20px;
+    padding-top: 10px;
     
     &__error{
         position: absolute;
@@ -33,9 +25,9 @@ $text-color-gray: rgb(73, 73, 73);
         position: absolute;
         top: 50%;
         left: 50%;
-        width: 50px;
-        height: 50px;
-        border: 3px dashed $light-gray;
+        width: 70px;
+        height: 70px;
+        border: 5px dashed $light-gray;
         border-radius: 50%;
         animation: rotate 2s infinite alternate ;
     }
@@ -51,7 +43,7 @@ $text-color-gray: rgb(73, 73, 73);
     &__container{
         max-width: 400px;
         width: 100%;
-        background: rgba(transparent, 0.3);
+        background: $back-opacity-light;
         border-radius: 10px;
     }
 
@@ -62,20 +54,19 @@ $text-color-gray: rgb(73, 73, 73);
 
     &__input{
         outline: none;
-        border: 3px solid #ffffff;
+        border: 3px solid $text-color-white;
         border-radius: 10px;
         background: transparent;
-        color: #ffffff;
+        color: $text-color-white;
         max-width: 250px;
         width: 100%;
         padding: 10px;
-        font-weight: 500;
-        font-size: 22px;
+        @include textMedium();
         margin-left: 10px;
 
         &::placeholder{
             font-family: $text-name;
-            color: #ffffff;
+            color: $text-color-white;
         }
     }
 
@@ -83,18 +74,17 @@ $text-color-gray: rgb(73, 73, 73);
         width: 50px;
         height: 50px;
         background: transparent;
-        border: 3px solid #ffffff;
+        border: 3px solid $text-color-white;
         border-radius: 50%;
-        color: #ffffff;
-        font-weight: 500;
-        font-size: 22px;
+        color: $text-color-white;
+        @include textMedium();
         margin-right: 10px;
         cursor: pointer;
         transform: scale(1);
         transition: all 200ms;
 
         &:hover{
-            box-shadow: 0 0 3px 3px #ffffff;
+            box-shadow: 0 0 3px 3px $text-color-white;
         }
 
         &:active{
@@ -103,7 +93,7 @@ $text-color-gray: rgb(73, 73, 73);
     }
 
     &-current{
-        color: #ffffff;
+        color: $text-color-white;
         padding: 10px;
 
         &__header{
@@ -121,12 +111,11 @@ $text-color-gray: rgb(73, 73, 73);
         }
 
         &__clouds{
-            display: flex;
-            flex-direction: column;
+            @include flexColumn();
         }
 
         &__info-main{
-            font-weight: 500;
+            @include textMedium();
             font-size: 26px;
         }
 
@@ -164,11 +153,18 @@ $text-color-gray: rgb(73, 73, 73);
 
     .forecast{
         width: 100%;
-        padding-top: 10px;
+        padding: 10px;
+        color: $text-color-white;
 
         &__container{
-            display: flex;
-            flex-direction: column;
+            @include flexColumn();
+        }
+
+        &__title{
+            padding-top: 5px;
+            font-weight: 400;
+            line-height: 20px;
+            font-size: 20px
         }
 
         &__items{
@@ -178,12 +174,16 @@ $text-color-gray: rgb(73, 73, 73);
         &__item{
             max-width: 140px;
             width: 100%;
-            background-color: #ffffff;
-            border: 2px solid $light-gray;
+            background: $back-opacity-medium;
             border-radius: 5px;
-            display: flex;
-            flex-direction: column;
+            @include flexColumn();
             align-items: center;
+            padding-bottom: 5px;
+        }
+
+        &__description{
+            @include textMedium();
+            font-size: 16px
         }
             
         &__days{
@@ -193,6 +193,7 @@ $text-color-gray: rgb(73, 73, 73);
 
         &__day{
             @include flexAround();
+            padding-bottom: 5px;
         }
     }
 }
@@ -203,13 +204,14 @@ $text-color-gray: rgb(73, 73, 73);
 
         .forecast{
             &__item{
-                max-width: 110px;
+                max-width: 130px;
                 width: 100%;
             }
     
             &__description{
                 display: none;
             }
+
         }
     }
 }
@@ -217,21 +219,27 @@ $text-color-gray: rgb(73, 73, 73);
 @media (max-width: 992px) {
     .weather{
         max-width: 750px;
+
+        .forecast{
+            &__item{
+                max-width: 110px;
+                width: 100%;
+            }
+
+            &__day{
+                max-width: 130px;
+                width: 100%;
+            }
+        }
     }
+
 }
 
 @media (max-width: 767px) {
     .weather{
-        max-width: none;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
+        max-width: 500px;
+        @include flexColumn();
         justify-content: center;
-
-        &__container{
-            min-width: 360px;
-            width: 100%;
-        }
 
         .forecast{
             &__items{
@@ -243,32 +251,54 @@ $text-color-gray: rgb(73, 73, 73);
             }
 
             &__item{
+                max-width: 130px;
+                width: 100%;
                 margin-bottom: 5px;
             }
 
             &__days{
                 justify-content: flex-start;
+                flex-wrap: wrap;
                 margin: 5px auto;
                 max-width: 400px;
                 width: 100%;
-                flex-wrap: wrap;
             }
 
             &__day{
-                margin-right: 35px;
+                margin-right: 5px;
 
                 &:nth-child(3){
                     margin-right: 0;
                 }
             }
 
-            // &__day{
-            //     &:nth-last-child(1){
-            //         position: absolute;
-            //         left: 145px;
-            //         top: 171px;
-            //     }
-            // }
+        }
+    }
+}
+
+@media (max-width: 430px) {
+    .weather{
+        max-width: 390px;
+
+        .forecast{
+            &__item{
+                max-width: 180px;
+                width: 100%;
+                padding: 10px 0;
+            }
+
+            &__day{
+                margin-right: 5px;
+
+                &:nth-child(3){
+                    margin-right: 5px;
+                }
+            }
+
+            &__title{
+                font-weight: 500;
+                font-size: 26px;
+            }
         }
     }
 }

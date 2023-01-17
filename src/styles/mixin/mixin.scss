@@ -1,0 +1,19 @@
+@mixin flexBetween(){
+    display: flex;
+    justify-content: space-between;
+}
+
+@mixin flexAround(){
+    display: flex;
+    justify-content: space-around;
+}
+
+@mixin flexColumn(){
+    display: flex;
+    flex-direction: column;
+}
+
+@mixin textMedium(){
+    font-weight: 500;
+    font-size: 22px;
+}

@@ -9,14 +9,13 @@ $text-name: 'Montserrat';
 }
 
 html{
+    background-image: url('../img/forest.jpg');
+    background-size: cover;
     font-family: $text-name, sans-serif;
 }
 
 .container{
     margin: 0 auto;
-    height: 100vh;
     display: flex;
     justify-content: center;
-    background-image: url('./img/forest.jpg');
-    background-size: cover;
 }

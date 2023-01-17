@@ -126,10 +126,11 @@ const Weather: FC = () => {
                             <div className="forecast__items">
                                 {forecast.list.slice(0,7).map((item: any) => 
                                         <div className="forecast__item" key={item.dt}>
-                                            <p>{new Date(item.dt * 1000).getHours() + ':' 
+                                            <p className="forecast__title">
+                                                    {new Date(item.dt * 1000).getHours() + ':' 
                                                     + (new Date(item.dt * 1000).getMinutes() < 10 ?
                                                     '0' + new Date(item.dt * 1000).getMinutes():
-                                                        new Date(item.dt * 1000).getMinutes())}
+                                                    new Date(item.dt * 1000).getMinutes())}
                                             </p>
                                             <p className="weather-current__info-main">{item.weather[0].main}</p>
                                             <img className="weather-desc__image forecast__image"alt='clouds' src={`http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`}></img>
@@ -147,7 +148,7 @@ const Weather: FC = () => {
                             <div className="forecast__days">
                                 {forecast.list.filter((list: any) => forecast.list.indexOf(list) % 8 === 0).map((list: any) => 
                                     <div className="forecast__item forecast__day" key={list.dt}>
-                                        <p>{days[new Date(list.dt_txt).getDay()]}</p>
+                                        <p className="forecast__title">{days[new Date(list.dt_txt).getDay()]}</p>
                                         <p className="weather-current__info-main">{list.weather[0].main}</p>
                                         <img className="weather-current__image forecast__image"alt='clouds' src={`http://openweathermap.org/img/wn/${list.weather[0].icon}@2x.png`}></img>
                                         <p className="weather-current__info-desc forecast__description">{list.weather[0].description}</p>

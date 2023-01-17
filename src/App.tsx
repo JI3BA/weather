@@ -1,5 +1,5 @@
 import  React from 'react'
-import './App.scss';
+import './styles/App.scss';
 import Weather from './component/weather/Weather';
 
 const App: React.FC = () => {
