@@ -1,13 +1,11 @@
 import  React from 'react'
 import './styles/App.scss';
-import Weather from './component/weather/Weather';
+import { Weather } from './component/weather/Weather';
 
-const App: React.FC = () => {
+export const App = () => {
   return (
     <div className="container">
       <Weather />
     </div>
   );
 }
-
-export default App;

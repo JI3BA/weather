@@ -1,11 +1,11 @@
-import React, { FC , useEffect , useState } from "react";
+import React, { useEffect , useState } from "react";
 import { useTypesSelector } from "../../hooks/useTypesSelector";
 import { useActions } from "../../hooks/useActions";
 import './Weather.scss'
 
 const days: string[] = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
 
-const Weather: FC = () => {
+export const Weather = () => {
     const {weathers, loading, error, city} = useTypesSelector(state => state.weather)
     const {fetchingWeather} = useActions()
     const {forecastWeather, forecastLoading, forecastError, forecastCity} = useTypesSelector(state => state.forecast)
@@ -133,7 +133,7 @@ const Weather: FC = () => {
                                                     new Date(item.dt * 1000).getMinutes())}
                                             </p>
                                             <p className="weather-current__info-main">{item.weather[0].main}</p>
-                                            <img className="weather-desc__image forecast__image"alt='clouds' src={`http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`}></img>
+                                            <img className="weather-desc__image forecast__image" alt='clouds' src={`http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`}></img>
                                             <p className="weather-current__info-desc forecast__description">{item.weather[0].description}</p>
                                             <p><span style={{fontWeight: 600, paddingLeft: 5}}>{temp === '℃' ?
                                                         <span>{Math.floor(item.main.temp - 273.15)}℃</span>
@@ -150,7 +150,7 @@ const Weather: FC = () => {
                                     <div className="forecast__item forecast__day" key={list.dt}>
                                         <p className="forecast__title">{days[new Date(list.dt_txt).getDay()]}</p>
                                         <p className="weather-current__info-main">{list.weather[0].main}</p>
-                                        <img className="weather-current__image forecast__image"alt='clouds' src={`http://openweathermap.org/img/wn/${list.weather[0].icon}@2x.png`}></img>
+                                        <img className="weather-current__image forecast__image" alt='clouds' src={`http://openweathermap.org/img/wn/${list.weather[0].icon}@2x.png`}></img>
                                         <p className="weather-current__info-desc forecast__description">{list.weather[0].description}</p>
                                         <p><span style={{fontWeight: 600, paddingLeft: 5}}>{temp === '℃' ?
                                                         <span>{Math.floor(list.main.temp_max - 273.15)}℃</span>
@@ -174,5 +174,3 @@ const Weather: FC = () => {
         </div>
     )
 }
-
-export default Weather
