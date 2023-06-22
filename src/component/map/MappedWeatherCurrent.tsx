@@ -3,10 +3,12 @@ import {useTypesSelector} from "../../hooks/useTypesSelector";
 
 type MappedWeatherCurrentType = {
     currentDay: string,
-    temp: string
+    temp: string,
+    celsius: string,
+    fahrenheit: string
 }
 
-export const MappedWeatherCurrent: FC<MappedWeatherCurrentType> = ({currentDay, temp}) => {
+export const MappedWeatherCurrent: FC<MappedWeatherCurrentType> = ({currentDay, temp, celsius, fahrenheit}) => {
     const { weathers } = useTypesSelector(state => state.weather)
 
     return (
@@ -35,9 +37,9 @@ export const MappedWeatherCurrent: FC<MappedWeatherCurrentType> = ({currentDay, 
                                     '0' + new Date((weather.sys.sunrise + weather.timezone) * 1000).getMinutes():
                                     new Date((weather.sys.sunrise + weather.timezone) * 1000).getMinutes())} am</p>
                             {temp === '℃' ?
-                                <p className="weather-current__temp">{Math.floor(weather.main.temp - 273.15)}℃</p>
+                                <p className="weather-current__temp">{Math.floor(weather.main.temp - 273.15)}{celsius}</p>
                                 :
-                                <p className="weather-current__temp">{Math.floor(((weather.main.temp - 273.15) * (9/5)) + 32)}℉</p>
+                                <p className="weather-current__temp">{Math.floor(((weather.main.temp - 273.15) * (9/5)) + 32)}{fahrenheit}</p>
                             }
                             <p>Sunset: {new Date((weather.sys.sunset + weather.timezone) * 1000).getUTCHours() + ':'
                                 + (new Date((weather.sys.sunset + weather.timezone) * 1000).getMinutes() < 10 ?
@@ -49,15 +51,15 @@ export const MappedWeatherCurrent: FC<MappedWeatherCurrentType> = ({currentDay, 
 
                     <div className="weather-current__footer">
                         <div className="weather-current__temp-maxmin">
-                            <p className="weather-current-footer__temp">Temp max:<span style={{fontWeight: 600, paddingLeft: 5}}>{temp === '℃' ?
-                                <span>{Math.floor(weather.main.temp_max - 273.15)}℃</span>
+                            <p className="weather-current-footer__temp">Temp max:<span style={{fontWeight: 600, paddingLeft: 5}}>{temp === celsius ?
+                                <span>{Math.floor(weather.main.temp_max - 273.15)}{celsius}</span>
                                 :
-                                <span>{Math.floor(((weather.main.temp_max - 273.15) * (9/5)) + 32)}℉</span>
+                                <span>{Math.floor(((weather.main.temp_max - 273.15) * (9/5)) + 32)}{fahrenheit}</span>
                             }</span></p>
-                            <p className="weather-current-footer__temp">Temp min:<span style={{fontWeight: 600, paddingLeft: 5}}>{temp === '℃' ?
-                                <span>{Math.floor(weather.main.temp_min - 273.15)}℃</span>
+                            <p className="weather-current-footer__temp">Temp min:<span style={{fontWeight: 600, paddingLeft: 5}}>{temp === celsius ?
+                                <span>{Math.floor(weather.main.temp_min - 273.15)}{celsius}</span>
                                 :
-                                <span>{Math.floor(((weather.main.temp_min - 273.15) * (9/5)) + 32)}℉</span>
+                                <span>{Math.floor(((weather.main.temp_min - 273.15) * (9/5)) + 32)}{fahrenheit}</span>
                             }</span></p>
                         </div>
                         <div className="weather-current__enviroment">

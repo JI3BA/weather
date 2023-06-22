@@ -13,7 +13,7 @@ export const Weather = () => {
     const {fetchingWeather} = useActions()
     const { forecastLoading, forecastError, forecastCity} = useTypesSelector(state => state.forecast)
     const {fetchingForecast} = useActions()
-    const celsius: string = 'C'
+    const celsius: string = '℃'
     const fahrenheit: string = 'F'
 
     const [temp, setTemp] = useState(celsius)
@@ -59,18 +59,18 @@ export const Weather = () => {
                 <div className="weather__header" onKeyDown={handleKeyDown}>
                     <input className='weather__input' type="text" placeholder="city" value={inputValue} onChange={onChangeHandle} maxLength={15} />
                     <div className="weather__btns">
-                        <Button className="weather__btn weather__btn--cl" onClick={() => setTemp(celsius)}>℃</Button>
-                        <Button className="weather__btn weather__btn--fr" onClick={() => setTemp(fahrenheit)}>℉</Button>
+                        <Button className="weather__btn weather__btn--cl" onClick={() => setTemp(celsius)}>{celsius}</Button>
+                        <Button className="weather__btn weather__btn--fr" onClick={() => setTemp(fahrenheit)}>{fahrenheit}</Button>
                     </div>
                 </div>
 
                 <div className="weather-current">
-                    <MappedWeatherCurrent currentDay={currentDay} temp={temp}/>
+                    <MappedWeatherCurrent celsius={celsius} fahrenheit={fahrenheit} currentDay={currentDay} temp={temp}/>
                 </div>
             </div>
 
             <div className="forecast">
-                <MappedForecast temp={temp} days={days}/>
+                <MappedForecast celsius={celsius} fahrenheit={fahrenheit} temp={temp} days={days}/>
             </div>
         </div>
     )

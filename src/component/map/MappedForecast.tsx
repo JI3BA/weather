@@ -5,10 +5,12 @@ import {FilteredForecastDays} from "../filter/FilteredForecastDays";
 
 type MappedForecastType = {
     temp: string,
-    days: string[]
+    days: string[],
+    celsius: string,
+    fahrenheit: string
 }
 
-export const MappedForecast: FC<MappedForecastType> = ({temp, days}) => {
+export const MappedForecast: FC<MappedForecastType> = ({temp, days, celsius, fahrenheit}) => {
     const { forecastWeather } = useTypesSelector(state => state.forecast)
 
     return (
@@ -17,11 +19,11 @@ export const MappedForecast: FC<MappedForecastType> = ({temp, days}) => {
                 <div className="forecast__container" key={forecast.city.id}>
 
                     <div className="forecast__items">
-                        <MappedForecastTimes forecast={forecast} temp={temp}/>
+                        <MappedForecastTimes celsius={celsius} fahrenheit={fahrenheit} forecast={forecast} temp={temp}/>
                     </div>
 
                     <div className="forecast__days">
-                        <FilteredForecastDays forecast={forecast} temp={temp} days={days}/>
+                        <FilteredForecastDays celsius={celsius} fahrenheit={fahrenheit} forecast={forecast} temp={temp} days={days}/>
                     </div>
                 </div>
             )}
