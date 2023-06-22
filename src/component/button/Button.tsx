@@ -6,6 +6,6 @@ type ButtonType = {
     className: string
 }
 
-export const Button: FC<ButtonType> = ({onClick, children}) => {
-    return <button onClick={onClick}>{children}</button>
+export const Button: FC<ButtonType> = ({onClick, children, className}) => {
+    return <button className={className} onClick={onClick}>{children}</button>
 }
