@@ -5,6 +5,7 @@ import './Weather.scss'
 import {MappedWeatherCurrent} from "../map/MappedWeatherCurrent";
 import {MappedForecast} from "../map/MappedForecast";
 import {Button} from "../button/Button";
+import {Input} from "../input/Input";
 
 const days: string[] = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
 
@@ -28,7 +29,7 @@ export const Weather = () => {
 
     }, [city, forecastCity])   
 
-    const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>): void => {
+    const onKeyDown = (e: KeyboardEvent<HTMLInputElement>): void => {
         if(e.key === 'Enter'){
             fetchingWeather(inputValue)
             fetchingForecast(inputValue)
@@ -36,14 +37,14 @@ export const Weather = () => {
         }
     }
     
-    const onChangeHandle = (e: ChangeEvent<HTMLInputElement>): void => {
+    const onChangeInput = (e: ChangeEvent<HTMLInputElement>): void => {
         setInputValue(e.target.value)
     }
     
     if(error || forecastError){
         return (
         <div className="weather__error">
-            <input className='weather__input' type="text" placeholder="city" onKeyDown={handleKeyDown} value={inputValue} onChange={onChangeHandle} maxLength={15} />
+            <Input className='weather__input' type="text" placeholder="city" onKeyDown={onKeyDown} value={inputValue} onChange={onChangeInput} maxLength={15} />
             <h1>{error}</h1>
         </div>)
     }
@@ -56,8 +57,8 @@ export const Weather = () => {
         <div className="weather">
             <div className="weather__container">
 
-                <div className="weather__header" onKeyDown={handleKeyDown}>
-                    <input className='weather__input' type="text" placeholder="city" value={inputValue} onChange={onChangeHandle} maxLength={15} />
+                <div className="weather__header" onKeyDown={onKeyDown}>
+                    <Input className='weather__input' type="text" placeholder="city" value={inputValue} onChange={onChangeInput} maxLength={15} />
                     <div className="weather__btns">
                         <Button className="weather__btn weather__btn--cl" onClick={() => setTemp(celsius)}>{celsius}</Button>
                         <Button className="weather__btn weather__btn--fr" onClick={() => setTemp(fahrenheit)}>{fahrenheit}</Button>
