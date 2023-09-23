@@ -21,12 +21,7 @@ export const FilteredForecastDays: FC<FilteredForecastDaysType> = ({forecast,tem
                         <span>{Math.floor(list.main.temp_max - 273.15)}{celsius}</span>
                         :
                         <span>{Math.floor(((list.main.temp_max - 273.15) * (9/5)) + 32)}{fahrenheit}</span>
-                    }</span> /
-                        <span style={{fontWeight: 600, paddingLeft: 5}}>{temp === celsius ?
-                            <span>{Math.floor(list.main.temp_min - 273.15)}{celsius}</span>
-                            :
-                            <span>{Math.floor(((list.main.temp_min - 273.15) * (9/5)) + 32)}{fahrenheit}</span>
-                        }</span>
+                    }</span>
                     </p>
                 </div>
             )}
