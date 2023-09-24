@@ -1,7 +1,9 @@
 import React, {FC} from "react";
+import {IForecast} from "../../types/IForecast";
+import {ListType} from "../../types/AdditionalForecastTypes";
 
 type FilteredForecastDaysType = {
-    forecast: any,
+    forecast: IForecast,
     temp: string,
     days: string[],
     celsius: string,
@@ -11,7 +13,7 @@ type FilteredForecastDaysType = {
 export const FilteredForecastDays: FC<FilteredForecastDaysType> = ({forecast,temp,days, celsius, fahrenheit}) => {
     return (
         <>
-            {forecast.list.filter((list: any) => forecast.list.indexOf(list) % 8 === 0).map((list: any) =>
+            {forecast.list.filter((list: ListType) => forecast.list.indexOf(list) % 8 === 0).map((list: ListType) =>
                 <div className="forecast__item forecast__day" key={list.dt}>
                     <p className="forecast__title">{days[new Date(list.dt_txt).getDay()]}</p>
                     <p className="weather-current__info-main">{list.weather[0].main}</p>

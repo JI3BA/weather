@@ -1,5 +1,6 @@
 import React, {FC} from "react";
 import {useTypesSelector} from "../../hooks/useTypesSelector";
+import {IWeather} from "../../types/IWeather";
 
 type MappedWeatherCurrentType = {
     currentDay: string,
@@ -13,7 +14,7 @@ export const MappedWeatherCurrent: FC<MappedWeatherCurrentType> = ({currentDay, 
 
     return (
         <>
-            {[...weathers].map((weather, index) =>
+            {[...weathers].map((weather: IWeather, index) =>
                 <div key={index} className="weather-current__container">
 
                     <div className="weather-current__header">

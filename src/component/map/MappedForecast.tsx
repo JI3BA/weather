@@ -2,6 +2,7 @@ import React, {FC} from "react";
 import {useTypesSelector} from "../../hooks/useTypesSelector";
 import {MappedForecastTimes} from "./MappedForecastTimes";
 import {FilteredForecastDays} from "../filter/FilteredForecastDays";
+import {IForecast} from "../../types/IForecast";
 
 type MappedForecastType = {
     temp: string,
@@ -15,7 +16,7 @@ export const MappedForecast: FC<MappedForecastType> = ({temp, days, celsius, fah
 
     return (
         <>
-            {[...forecastWeather].map(forecast =>
+            {[...forecastWeather].map((forecast: IForecast) =>
                 <div className="forecast__container" key={forecast.city.id}>
 
                     <div className="forecast__items">

@@ -1,4 +1,5 @@
 import React, {FC} from "react";
+import {ListType} from "../../types/AdditionalForecastTypes";
 
 type MappedForecastTimesType = {
     forecast: any,
@@ -10,7 +11,7 @@ type MappedForecastTimesType = {
 export const MappedForecastTimes: FC<MappedForecastTimesType> = ({forecast,temp, celsius, fahrenheit}) => {
     return (
         <>
-            {forecast.list.slice(0,7).map((item: any) =>
+            {forecast.list.slice(0,7).map((item: ListType) =>
                 <div className="forecast__item" key={item.dt}>
                     <p className="forecast__title">
                         {new Date(item.dt * 1000).getHours() + ':'
