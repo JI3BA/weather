@@ -1,15 +1,32 @@
 # Weather App
 
-Weather application for displaying information about weather for the entered city.
+An application to access real-time weather data for any location.
 
-Features:
-- Displaying current weather.
+## Features
+
+Weather App provides a comprehensive set of features, including:
+
+- Displaying the current weather conditions.
 - Forecast for every three hours.
-- Weather forecast for 5 days ahead.
-- Information about day of week.
-- Metrics: wind speed, pressure, max and min temperatures, sunrise and sunset time.
-- Temperature units: Celsius (used as default), Fahrenheit.
+- A 5-day weather forecast, complete with day of the week information.
+- Key metrics such as wind speed, pressure, maximum and minimum temperatures, as well as sunrise and sunset times.
+- Temperature units can be toggled between Celsius (default) and Fahrenheit for your convenience.
 
-## Tech stack
+## Tech Stack
 
-HTML, CSS, TypeScript, React, Axios, React Hooks, Redux, Redux Thunk.
+Our application is built using the following technologies:
+
+- **HTML** and **CSS** for the user interface.
+- **TypeScript** to ensure code quality and maintainability.
+- **React** and **React Hooks** for creating a dynamic and responsive user experience.
+- **Axios** for making API requests to fetch weather data.
+- **Redux** and **Redux Thunk** for state management, enabling a seamless flow of data.
+
+## Installation
+
+To get started with the Weather App:
+
+1. Clone this repository to your local machine.
+2. Navigate to the project directory.
+3. Run `npm install` to install the necessary dependencies.
+4. Run `npm start` to launch the app.
